@@ -1,4 +1,5 @@
-import { colors, borderRadius, transitions } from '../styles/theme';
+import { getThemeColors, borderRadius, transitions } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const Button = ({ 
   children, 
@@ -9,6 +10,9 @@ const Button = ({
   disabled = false,
   fullWidth = false
 }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const getVariantStyles = () => {
     const variants = {
       primary: {
@@ -18,9 +22,9 @@ const Button = ({
         border: 'transparent'
       },
       secondary: {
-        bg: colors.white,
+        bg: colors.bgCard,
         color: colors.primary,
-        hover: colors.gray100,
+        hover: colors.bgHover,
         border: colors.border
       },
       danger: {

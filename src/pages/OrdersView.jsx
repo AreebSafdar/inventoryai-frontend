@@ -7,10 +7,14 @@ import Modal from '../components/Modal';
 import OrderForm from '../components/OrderForm';
 import OrderDetails from '../components/OrderDetails';
 import { orders as initialOrders } from '../data/mockData';
-import { colors, borderRadius } from '../styles/theme';
+import { getThemeColors, borderRadius } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 import { formatDate, formatCurrency, getStatusLabel } from '../utils/formatters';
 
 const OrdersView = () => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const [orders, setOrders] = useState(initialOrders);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
@@ -31,7 +35,7 @@ const OrdersView = () => {
     padding: '20px',
     borderRadius: borderRadius.lg,
     border: `1px solid ${colors.border}`,
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgCard,
     display: 'flex',
     flexDirection: 'column',
     gap: '16px',
@@ -90,7 +94,7 @@ const OrdersView = () => {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '8px 12px',
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgHover,
     borderRadius: borderRadius.sm,
     border: `1px solid ${colors.border}`
   };

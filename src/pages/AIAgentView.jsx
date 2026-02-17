@@ -4,9 +4,13 @@ import Card from '../components/Card';
 import AIActivityFeed from '../components/AIActivityFeed';
 import Button from '../components/Button';
 import { aiActivities } from '../data/mockData';
-import { colors, borderRadius } from '../styles/theme';
+import { getThemeColors, borderRadius } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const AIAgentView = () => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const [autonomousMode, setAutonomousMode] = useState(true);
 
   const containerStyle = {

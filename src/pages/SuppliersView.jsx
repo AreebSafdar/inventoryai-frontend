@@ -3,9 +3,12 @@ import Card from '../components/Card';
 import Button from '../components/Button';
 import Badge from '../components/Badge';
 import { suppliers } from '../data/mockData';
-import { colors, borderRadius } from '../styles/theme';
+import { getThemeColors, borderRadius } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const SuppliersView = () => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
   const containerStyle = {
     padding: '32px'
   };
@@ -21,7 +24,7 @@ const SuppliersView = () => {
     padding: '24px',
     borderRadius: borderRadius.lg,
     border: `1px solid ${colors.border}`,
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgCard,
     display: 'flex',
     flexDirection: 'column',
     gap: '16px',

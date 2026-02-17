@@ -1,10 +1,13 @@
 import Card from '../components/Card';
 import { SalesTrendChart, CategoryChart } from '../components/SalesChart';
 import { salesData, categoryPerformance } from '../data/mockData';
-import { colors, borderRadius } from '../styles/theme';
+import { getThemeColors, borderRadius } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 import { TrendingUp, Package, DollarSign } from 'lucide-react';
 
 const AnalyticsView = () => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
   const containerStyle = {
     padding: '32px',
     display: 'flex',
@@ -28,7 +31,7 @@ const AnalyticsView = () => {
     padding: '20px',
     borderRadius: borderRadius.lg,
     border: `1px solid ${colors.border}`,
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgCard,
     display: 'flex',
     flexDirection: 'column',
     gap: '12px'

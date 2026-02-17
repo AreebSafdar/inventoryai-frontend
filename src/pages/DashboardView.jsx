@@ -3,10 +3,13 @@ import MetricCard from '../components/MetricCard';
 import Card from '../components/Card';
 import AIActivityFeed from '../components/AIActivityFeed';
 import { metrics, aiActivities, products } from '../data/mockData';
-import { colors, borderRadius } from '../styles/theme';
+import { getThemeColors, borderRadius } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 import Badge from '../components/Badge';
 
 const DashboardView = () => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
   const containerStyle = {
     padding: '32px',
     display: 'flex',

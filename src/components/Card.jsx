@@ -1,6 +1,9 @@
-import { colors, borderRadius, shadows } from '../styles/theme';
+import { getThemeColors, borderRadius, shadows } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const Card = ({ children, title, action, noPadding = false, className = '' }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
   const cardStyle = {
     backgroundColor: colors.bgCard,
     borderRadius: borderRadius.lg,

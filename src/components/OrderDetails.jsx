@@ -1,10 +1,14 @@
 import { Package, Calendar, DollarSign, Truck, MapPin, Phone, Mail, Clock } from 'lucide-react';
-import { colors, borderRadius } from '../styles/theme';
+import { getThemeColors, borderRadius } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 import Badge from './Badge';
 import { formatDate, formatCurrency, getStatusLabel, formatDateTime } from '../utils/formatters';
 import { suppliers } from '../data/mockData';
 
 const OrderDetails = ({ order }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const supplier = suppliers.find(s => s.id === order.supplierId);
 
   const containerStyle = {
@@ -15,7 +19,7 @@ const OrderDetails = ({ order }) => {
 
   const sectionStyle = {
     padding: '20px',
-    backgroundColor: colors.gray50,
+    backgroundColor: colors.bgHover,
     borderRadius: borderRadius.md,
     border: `1px solid ${colors.border}`
   };
@@ -70,7 +74,7 @@ const OrderDetails = ({ order }) => {
     color: colors.textSecondary,
     textTransform: 'uppercase',
     borderBottom: `2px solid ${colors.border}`,
-    backgroundColor: colors.white
+    backgroundColor: colors.bgHover
   };
 
   const tdStyle = {
@@ -78,7 +82,7 @@ const OrderDetails = ({ order }) => {
     borderBottom: `1px solid ${colors.border}`,
     fontSize: '14px',
     color: colors.textPrimary,
-    backgroundColor: colors.white
+    backgroundColor: colors.bgCard
   };
 
   const timelineStyle = {

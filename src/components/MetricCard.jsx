@@ -1,10 +1,14 @@
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
-import { colors, borderRadius, shadows } from '../styles/theme';
+import { getThemeColors, borderRadius, shadows } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 import { formatNumber, formatPercent } from '../utils/formatters';
 
 const MetricCard = ({ label, value, change, trend, icon: Icon }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const cardStyle = {
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgCard,
     padding: '20px',
     borderRadius: borderRadius.lg,
     boxShadow: shadows.sm,

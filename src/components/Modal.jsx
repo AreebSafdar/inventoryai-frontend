@@ -1,7 +1,11 @@
 import { X } from 'lucide-react';
-import { colors, borderRadius, shadows } from '../styles/theme';
+import { getThemeColors, borderRadius, shadows } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const Modal = ({ isOpen, onClose, title, children, size = 'medium' }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   if (!isOpen) return null;
 
   const getSizeWidth = () => {
@@ -30,7 +34,7 @@ const Modal = ({ isOpen, onClose, title, children, size = 'medium' }) => {
   };
 
   const modalStyle = {
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgCard,
     borderRadius: borderRadius.lg,
     boxShadow: shadows.xl,
     width: '100%',
@@ -90,7 +94,7 @@ const Modal = ({ isOpen, onClose, title, children, size = 'medium' }) => {
             style={closeButtonStyle}
             onClick={onClose}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = colors.gray100;
+              e.currentTarget.style.backgroundColor = colors.bgHover;
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent';

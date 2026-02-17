@@ -1,9 +1,12 @@
 import { Bell, RefreshCw, Settings } from 'lucide-react';
-import { colors, borderRadius, transitions } from '../styles/theme';
+import { getThemeColors, borderRadius, transitions } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const Header = ({ title, subtitle, onSettingsClick, onNotificationsClick }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
   const headerStyle = {
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgCard,
     borderBottom: `1px solid ${colors.border}`,
     padding: '20px 32px',
     position: 'sticky',
@@ -41,7 +44,7 @@ const Header = ({ title, subtitle, onSettingsClick, onNotificationsClick }) => {
     height: '40px',
     borderRadius: borderRadius.md,
     border: `1px solid ${colors.border}`,
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgCard,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -82,10 +85,10 @@ const Header = ({ title, subtitle, onSettingsClick, onNotificationsClick }) => {
         <div
           style={iconButtonStyle}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = colors.gray100;
+            e.currentTarget.style.backgroundColor = colors.bgHover;
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = colors.white;
+            e.currentTarget.style.backgroundColor = colors.bgCard;
           }}
         >
           <RefreshCw size={18} />
@@ -96,10 +99,10 @@ const Header = ({ title, subtitle, onSettingsClick, onNotificationsClick }) => {
             style={iconButtonStyle}
             onClick={onNotificationsClick}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = colors.gray100;
+              e.currentTarget.style.backgroundColor = colors.bgHover;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = colors.white;
+              e.currentTarget.style.backgroundColor = colors.bgCard;
             }}
           >
             <Bell size={18} />
@@ -111,10 +114,10 @@ const Header = ({ title, subtitle, onSettingsClick, onNotificationsClick }) => {
           style={iconButtonStyle}
           onClick={onSettingsClick}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = colors.gray100;
+            e.currentTarget.style.backgroundColor = colors.bgHover;
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = colors.white;
+            e.currentTarget.style.backgroundColor = colors.bgCard;
           }}
         >
           <Settings size={18} />

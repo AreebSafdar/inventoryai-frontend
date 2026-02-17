@@ -14,10 +14,12 @@ import {
   Moon,
   Sun
 } from 'lucide-react';
-import { colors, borderRadius, spacing } from '../styles/theme';
+import { getThemeColors, borderRadius, spacing } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const SettingsView = ({ userProfile, userEmail, onProfileUpdate }) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const { isDarkMode, toggleTheme } = useTheme();
+  const colors = getThemeColors(isDarkMode);
   const [notifications, setNotifications] = useState({
     email: true,
     push: true,
@@ -322,17 +324,17 @@ const SettingsView = ({ userProfile, userEmail, onProfileUpdate }) => {
             </div>
             <div style={{ ...toggleRowStyle, borderBottom: 'none' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                {darkMode ? <Moon size={18} color={colors.textSecondary} /> : <Sun size={18} color={colors.textSecondary} />}
+                {isDarkMode ? <Moon size={18} color={colors.textSecondary} /> : <Sun size={18} color={colors.textSecondary} />}
                 <div>
                   <div style={toggleLabelStyle}>Dark Mode</div>
                   <div style={toggleDescStyle}>Use dark theme across the app</div>
                 </div>
               </div>
               <div 
-                style={switchStyle(darkMode)} 
-                onClick={() => setDarkMode(!darkMode)}
+                style={switchStyle(isDarkMode)} 
+                onClick={toggleTheme}
               >
-                <div style={switchKnobStyle(darkMode)} />
+                <div style={switchKnobStyle(isDarkMode)} />
               </div>
             </div>
           </div>
@@ -456,7 +458,7 @@ const SettingsView = ({ userProfile, userEmail, onProfileUpdate }) => {
       <div style={{ 
         position: 'sticky', 
         bottom: 0, 
-        backgroundColor: colors.white, 
+        backgroundColor: colors.bgMain, 
         padding: '16px 0',
         borderTop: `1px solid ${colors.border}`,
         display: 'flex',

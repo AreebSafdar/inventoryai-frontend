@@ -5,9 +5,13 @@ import Button from '../components/Button';
 import Modal from '../components/Modal';
 import { Plus } from 'lucide-react';
 import { products } from '../data/mockData';
-import { colors, borderRadius, spacing } from '../styles/theme';
+import { getThemeColors, borderRadius, spacing } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const InventoryView = () => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -43,6 +47,7 @@ const InventoryView = () => {
     borderRadius: borderRadius.md,
     outline: 'none',
     fontFamily: 'inherit',
+    backgroundColor: colors.bgCard,
     color: colors.textPrimary,
     boxSizing: 'border-box'
   };

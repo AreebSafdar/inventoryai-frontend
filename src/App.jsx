@@ -12,8 +12,12 @@ import OrdersView from './pages/OrdersView';
 import AIAgentView from './pages/AIAgentView';
 import SettingsView from './pages/SettingsView';
 import NotificationsView from './pages/NotificationsView';
+import { useTheme } from './context/ThemeContext';
+import { getThemeColors } from './styles/theme';
 
 function App() {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem('isAuthenticated') === 'true'
@@ -66,7 +70,7 @@ function App() {
   const appStyle = {
     display: 'flex',
     minHeight: '100vh',
-    backgroundColor: '#f8fafc'
+    backgroundColor: colors.bgMain
   };
 
   const mainContentStyle = {

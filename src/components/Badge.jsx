@@ -1,6 +1,10 @@
-import { colors } from '../styles/theme';
+import { getThemeColors } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const Badge = ({ status, children }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const getStatusStyles = () => {
     const styles = {
       'in-stock': {

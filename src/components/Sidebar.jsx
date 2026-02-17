@@ -9,9 +9,12 @@ import {
   Bell,
   LogOut
 } from 'lucide-react';
-import { colors, transitions } from '../styles/theme';
+import { getThemeColors, transitions } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const Sidebar = ({ activeTab, onTabChange, onLogout, userEmail, userProfile }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
   const menuItems = [
     { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { id: 'inventory', icon: Package, label: 'Inventory' },

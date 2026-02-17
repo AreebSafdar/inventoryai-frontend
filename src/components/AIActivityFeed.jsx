@@ -1,9 +1,13 @@
 import { Bot, AlertTriangle, CheckCircle, Info, TrendingUp } from 'lucide-react';
-import { colors, borderRadius } from '../styles/theme';
+import { getThemeColors, borderRadius } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 import { formatTimeAgo } from '../utils/formatters';
 import Badge from './Badge';
 
 const AIActivityFeed = ({ activities }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const getActivityIcon = (type) => {
     const icons = {
       detection: AlertTriangle,
@@ -39,7 +43,7 @@ const AIActivityFeed = ({ activities }) => {
     padding: '16px',
     borderRadius: borderRadius.md,
     border: `1px solid ${colors.border}`,
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgCard,
     transition: 'all 0.2s ease'
   });
 

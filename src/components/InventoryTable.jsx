@@ -1,11 +1,15 @@
 import { MoreVertical, Eye, RefreshCw, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import { colors, borderRadius } from '../styles/theme';
+import { getThemeColors, borderRadius } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 import Badge from './Badge';
 import Button from './Button';
 import { getStatusLabel, formatCurrency, formatDate } from '../utils/formatters';
 
 const InventoryTable = ({ products }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('All Categories');
 
@@ -23,7 +27,7 @@ const InventoryTable = ({ products }) => {
     textTransform: 'uppercase',
     letterSpacing: '0.5px',
     borderBottom: `2px solid ${colors.border}`,
-    backgroundColor: colors.gray50
+    backgroundColor: colors.bgHover
   };
 
   const tdStyle = {
@@ -91,7 +95,9 @@ const InventoryTable = ({ products }) => {
     borderRadius: borderRadius.md,
     border: `1px solid ${colors.border}`,
     fontSize: '14px',
-    outline: 'none'
+    outline: 'none',
+    backgroundColor: colors.bgCard,
+    color: colors.textPrimary
   };
 
   const selectStyle = {
@@ -100,7 +106,8 @@ const InventoryTable = ({ products }) => {
     border: `1px solid ${colors.border}`,
     fontSize: '14px',
     outline: 'none',
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgCard,
+    color: colors.textPrimary,
     cursor: 'pointer'
   };
 

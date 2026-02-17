@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { Package, Plus, Trash2 } from 'lucide-react';
 import Button from './Button';
-import { colors, borderRadius } from '../styles/theme';
+import { getThemeColors, borderRadius } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 import { suppliers, products } from '../data/mockData';
 
 const OrderForm = ({ onSubmit, onCancel }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const [formData, setFormData] = useState({
     supplierId: '',
     items: [{ productId: '', quantity: 1 }]
@@ -36,7 +40,8 @@ const OrderForm = ({ onSubmit, onCancel }) => {
     fontSize: '14px',
     outline: 'none',
     width: '100%',
-    backgroundColor: colors.white
+    backgroundColor: colors.bgCard,
+    color: colors.textPrimary
   };
 
   const itemRowStyle = {
@@ -51,7 +56,7 @@ const OrderForm = ({ onSubmit, onCancel }) => {
     height: '40px',
     borderRadius: borderRadius.md,
     border: `1px solid ${colors.border}`,
-    backgroundColor: colors.white,
+    backgroundColor: colors.bgCard,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -227,7 +232,7 @@ const OrderForm = ({ onSubmit, onCancel }) => {
                 }
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = colors.white;
+                e.currentTarget.style.backgroundColor = colors.bgCard;
               }}
             >
               <Trash2 size={18} />

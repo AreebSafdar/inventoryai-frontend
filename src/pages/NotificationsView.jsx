@@ -15,9 +15,13 @@ import {
   Check,
   Trash2
 } from 'lucide-react';
-import { colors, borderRadius, spacing, transitions } from '../styles/theme';
+import { getThemeColors, borderRadius, spacing, transitions } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 
 const NotificationsView = () => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const [notifications, setNotifications] = useState([
     {
       id: 'N001',
@@ -126,7 +130,7 @@ const NotificationsView = () => {
     fontSize: '13px',
     fontWeight: '500',
     border: `1px solid ${isActive ? colors.primary : colors.border}`,
-    backgroundColor: isActive ? colors.primary : colors.white,
+    backgroundColor: isActive ? colors.primary : colors.bgCard,
     color: isActive ? colors.white : colors.textSecondary,
     borderRadius: borderRadius.md,
     cursor: 'pointer',
@@ -139,7 +143,7 @@ const NotificationsView = () => {
     borderBottom: `1px solid ${colors.border}`,
     display: 'flex',
     gap: '16px',
-    backgroundColor: isRead ? colors.white : colors.gray50,
+    backgroundColor: isRead ? colors.bgCard : colors.bgHover,
     transition: transitions.normal,
     cursor: 'pointer'
   });
@@ -337,7 +341,7 @@ const NotificationsView = () => {
                   e.currentTarget.style.backgroundColor = notification.read ? colors.gray50 : colors.gray100;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = notification.read ? colors.white : colors.gray50;
+                  e.currentTarget.style.backgroundColor = notification.read ? colors.bgCard : colors.bgHover;
                 }}
               >
                 <div style={iconWrapperStyle(notification.type)}>

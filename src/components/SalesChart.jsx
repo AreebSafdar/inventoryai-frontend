@@ -1,13 +1,17 @@
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { colors } from '../styles/theme';
+import { getThemeColors } from '../styles/theme';
+import { useTheme } from '../context/ThemeContext';
 import { formatCurrency } from '../utils/formatters';
 
 export const SalesTrendChart = ({ data }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
         <div style={{
-          backgroundColor: colors.white,
+          backgroundColor: colors.bgCard,
           padding: '12px',
           border: `1px solid ${colors.border}`,
           borderRadius: '8px',
@@ -68,11 +72,14 @@ export const SalesTrendChart = ({ data }) => {
 };
 
 export const CategoryChart = ({ data }) => {
+  const { isDarkMode } = useTheme();
+  const colors = getThemeColors(isDarkMode);
+  
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
         <div style={{
-          backgroundColor: colors.white,
+          backgroundColor: colors.bgCard,
           padding: '12px',
           border: `1px solid ${colors.border}`,
           borderRadius: '8px',
